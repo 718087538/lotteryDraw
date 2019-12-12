@@ -12,7 +12,7 @@
               <p>
                 <b>抽奖</b>
               </p>
-              <p>消耗{{score}}积分</p>
+              <!-- <p>消耗{{score}}积分</p> -->
             </div>
             <div class="box gray" v-if="isStart===2">
               <p>活动已过期</p>
@@ -53,13 +53,25 @@ export default {
       score: 10, //消耗积分
       list: [
         { img: "static/img/j1.png", title: "谢谢参与" },
-        { img: "https://s2.ax1x.com/2019/12/12/QyOhCj.png", title: "浪漫家庭海盗七日游" },
-        { img: "https://s2.ax1x.com/2019/12/12/QyO48s.png", title: "苹果11 pro max" },
+        {
+          img: "https://s2.ax1x.com/2019/12/12/QyOhCj.png",
+          title: "浪漫家庭海盗七日游"
+        },
+        {
+          img: "https://s2.ax1x.com/2019/12/12/QyO48s.png",
+          title: "苹果11 pro max"
+        },
         { img: "https://s2.ax1x.com/2019/12/12/QyOTK0.png", title: "2999现金" },
         { img: "https://s2.ax1x.com/2019/12/12/QyO7rV.png", title: "999现金" },
-        { img: "https://s2.ax1x.com/2019/12/12/QyOqVU.png", title: "扫地机器人" },
+        {
+          img: "https://s2.ax1x.com/2019/12/12/QyOqVU.png",
+          title: "扫地机器人"
+        },
         { img: "https://s2.ax1x.com/2019/12/12/QyOHbT.png", title: "全家福" },
-        { img: "https://s2.ax1x.com/2019/12/12/QyOIvq.png", title: "客气净化器" }
+        {
+          img: "https://s2.ax1x.com/2019/12/12/QyOIvq.png",
+          title: "客气净化器"
+        }
       ], //奖品1-9
       index: -1, // 当前转动到哪个位置，起点位置
       count: 8, // 总共有多少个位置
@@ -170,7 +182,6 @@ export default {
 </script>
 
 <style>
-
 @keyframes changeBg {
   0% {
     background-image: url(https://s2.ax1x.com/2019/12/12/Qy2jCF.png);
@@ -180,51 +191,75 @@ export default {
   }
 }
 
-.lottery .lottery-item {
-  height: 340px;
-  position: relative;
-  margin-top: 10px;
-  margin-left: 10px;
+.lottery-box {
+  overflow: hidden;
+}
+.lottery-box .title {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 18px;
+  color: #fff;
+}
+.lottery {
+  overflow: hidden;
+  animation: changeBg 0.5s ease infinite;
+  overflow: hidden;
+  padding: 50px;
+  width: 800px;
+  height: 800px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
+.lottery .lottery-item {
+  height: 100%;
+  position: relative;
+}
 
 .lottery .lottery-item ul li {
   width: 33.33333333%;
+  height: 33.33333333%;
   position: absolute;
   padding-right: 10px;
+  padding-bottom: 10px;
 }
+
 .lottery .lottery-item ul li:nth-child(2) {
   left: 33.33333333%;
 }
 .lottery .lottery-item ul li:nth-child(3) {
   left: 66.66666666%;
+  padding-right: 0;
 }
 .lottery .lottery-item ul li:nth-child(4) {
   left: 66.66666666%;
-  top: 110px;
-}
+  top: 230px;
+  padding-right: 0;
 
+}
 
 .lottery .lottery-item ul li:nth-child(5) {
   left: 66.66666666%;
-  top: 220px;
+  top: 460px;
+  padding-right: 0;
+
 }
 .lottery .lottery-item ul li:nth-child(6) {
   left: 33.33333333%;
-  top: 220px;
+  top:460px;
 }
 .lottery .lottery-item ul li:nth-child(7) {
   left: 0;
-  top: 220px;
+  top:460px;
 }
 .lottery .lottery-item ul li:nth-child(8) {
   left: 0;
-  top: 110px;
+  top: 230px;
 }
 
-
 .lottery .lottery-item ul li .box {
-  height: 100px;
+  height: 100%;
   position: relative;
   text-align: center;
   overflow: hidden;
@@ -233,7 +268,7 @@ export default {
 }
 .lottery .lottery-item ul li .box img {
   display: block;
-  height: 50px;
+  height: 150px;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 5px;
@@ -243,7 +278,7 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 14px;
+  font-size: 20px;
 }
 .lottery .lottery-item ul li.on .box {
   background: url(https://s2.ax1x.com/2019/12/12/Qy2qEV.png) no-repeat center;
@@ -253,16 +288,17 @@ export default {
   color: #fff;
 }
 
-
 .lottery .lottery-item .lottery-start {
   position: absolute;
   left: 33.33333333%;
   width: 33.33333333%;
-  top: 110px;
+  height: 33.3333333%;
+  top: 230px;
   padding-right: 10px;
+  padding-bottom: 10px;
 }
 .lottery .lottery-item .lottery-start .box {
-  height: 100px;
+  height:100%;
   font-size: 14px;
   color: #fff;
   cursor: pointer;
@@ -272,13 +308,11 @@ export default {
   background-size: 100% 100%;
 }
 
-
-
 .lottery .lottery-item .lottery-start .box p b {
-  font-size: 40px;
+  font-size: 60px;
   margin-top: 16px;
   margin-bottom: 15px;
-  line-height: 30px;
+  line-height: 180px;
   display: block;
 }
 .lottery .lottery-item .lottery-start .box:active {
@@ -293,9 +327,6 @@ export default {
   font-weight: bold;
 }
 
-
-
-
 /* ------------------------------------- */
 * {
   margin: 0px;
@@ -308,7 +339,6 @@ body {
   font-size: 14px;
   background: url(https://s2.ax1x.com/2019/12/12/QyXFaD.jpg) no-repeat;
   background-size: 100% 100%;
-
 }
 img {
   border: 0px;
@@ -317,25 +347,6 @@ ul,
 li {
   list-style-type: none;
 }
-.lottery-box {
-  overflow: hidden;
-}
-.lottery-box .title {
-  text-align: center;
-  padding: 50px 0;
-  font-size: 18px;
-  color: #fff;
-}
-.lottery {
-  animation: changeBg 0.5s ease infinite;
-  overflow: hidden;
-  padding: 20px;
-  width: 400px;
-  margin: 0 auto;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
 /* 这下面没问题 */
 .mask {
   width: 100%;
