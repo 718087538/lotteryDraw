@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="lottery-box" id="app">
-      <h1 class="title">幸运大抽奖</h1>
+      <h1 class="title">浪漫元旦礼遇季 空格豪礼送不停</h1>
       <div class="lottery">
         <div class="lottery-item">
           <div class="lottery-start">
@@ -208,9 +208,9 @@ export default {
   overflow: hidden;
   animation: changeBg 0.5s ease infinite;
   overflow: hidden;
-  padding: 50px;
-  width: 800px;
-  height: 800px;
+  padding: 24px;
+  width: 400px;
+  height: 400px;
   margin: 0 auto;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -238,28 +238,27 @@ export default {
 }
 .lottery .lottery-item ul li:nth-child(4) {
   left: 66.66666666%;
-  top: 230px;
+  top: 116px;
   padding-right: 0;
 }
 
 .lottery .lottery-item ul li:nth-child(5) {
   left: 66.66666666%;
-  top: 460px;
+  top: 232px;
   padding-right: 0;
 }
 .lottery .lottery-item ul li:nth-child(6) {
   left: 33.33333333%;
-  top: 460px;
+  top:232px;
 }
 .lottery .lottery-item ul li:nth-child(7) {
   left: 0;
-  top: 460px;
+  top: 232px;
 }
 .lottery .lottery-item ul li:nth-child(8) {
   left: 0;
-  top: 230px;
+  top: 116px;
 }
-
 .lottery .lottery-item ul li .box {
   height: 100%;
   position: relative;
@@ -270,7 +269,7 @@ export default {
 }
 .lottery .lottery-item ul li .box img {
   display: block;
-  height: 150px;
+  height: 50px;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 5px;
@@ -280,7 +279,7 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 20px;
+  font-size: 14px;
 }
 .lottery .lottery-item ul li.on .box {
   background: url(https://s2.ax1x.com/2019/12/12/Qy2qEV.png) no-repeat center;
@@ -295,7 +294,7 @@ export default {
   left: 33.33333333%;
   width: 33.33333333%;
   height: 33.3333333%;
-  top: 230px;
+  top: 116px;
   padding-right: 10px;
   padding-bottom: 10px;
 }
@@ -311,10 +310,10 @@ export default {
 }
 
 .lottery .lottery-item .lottery-start .box p b {
-  font-size: 60px;
+  font-size: 30px;
   margin-top: 16px;
   margin-bottom: 15px;
-  line-height: 180px;
+  line-height: 55px;
   display: block;
 }
 .lottery .lottery-item .lottery-start .box:active {
@@ -339,7 +338,7 @@ body {
   height: 100vh;
   /* background: radial-gradient(49% 160%, #22b5ff 0, #3a72fa 100%); */
   font-size: 14px;
-  background: url(https://s2.ax1x.com/2019/12/12/QyXFaD.jpg) no-repeat;
+  background: url(https://s2.ax1x.com/2019/12/12/Q6GxMQ.jpg) no-repeat;
   background-size: 100% 100%;
 }
 img {
