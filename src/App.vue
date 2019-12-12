@@ -52,7 +52,6 @@ export default {
       isStart: 1,
       score: 10, //消耗积分
       list: [
-        { img: "static/img/j1.png", title: "谢谢参与" },
         {
           img: "https://s2.ax1x.com/2019/12/12/QyOhCj.png",
           title: "浪漫家庭海盗七日游"
@@ -61,7 +60,8 @@ export default {
           img: "https://s2.ax1x.com/2019/12/12/QyO48s.png",
           title: "苹果11 pro max"
         },
-        { img: "https://s2.ax1x.com/2019/12/12/QyOTK0.png", title: "2999现金" },
+        { img: "https://s2.ax1x.com/2019/12/12/QyO52n.png", title: "2999现金" },
+        { img: "https://s2.ax1x.com/2019/12/12/QyOTK0.png", title: "1999现金" },
         { img: "https://s2.ax1x.com/2019/12/12/QyO7rV.png", title: "999现金" },
         {
           img: "https://s2.ax1x.com/2019/12/12/QyOqVU.png",
@@ -70,8 +70,9 @@ export default {
         { img: "https://s2.ax1x.com/2019/12/12/QyOHbT.png", title: "全家福" },
         {
           img: "https://s2.ax1x.com/2019/12/12/QyOIvq.png",
-          title: "客气净化器"
-        }
+          title: "空气净化器"
+        },
+
       ], //奖品1-9
       index: -1, // 当前转动到哪个位置，起点位置
       count: 8, // 总共有多少个位置
@@ -80,15 +81,7 @@ export default {
       times: 0, // 转动次数
       cycle: 50, // 转动基本次数：即至少需要转动多少次再进入抽奖环节
       prize: -1, // 中奖位置
-      p1: 1,
-      p2: 2,
-      p3: 2, //三等奖的数量
-      p4: 10,
-      p5: 11,
-      p6: 15,
-      p7: 20,
-      p8: 100,
-
+      p4: 1,
       click: true,
       showToast: false //显示中奖弹窗
     };
@@ -177,6 +170,17 @@ export default {
       } //转动的位置是0，1，2~7； 如果位置处于8，就重置为0。
       this.index = index; //转动1次,转动1个位置;
     }
+  },
+  mounted() {
+    this.$axios({
+      method: "get",
+      url: "http://192.168.0.195:7004/api/prize", // 接口地址
+     
+    })
+      .then(res => {
+        console.log(res, "success"); // 成功的返回
+      })
+      .catch(error => console.log(error, "error")); // 失败的返回
   }
 };
 </script>
@@ -236,22 +240,20 @@ export default {
   left: 66.66666666%;
   top: 230px;
   padding-right: 0;
-
 }
 
 .lottery .lottery-item ul li:nth-child(5) {
   left: 66.66666666%;
   top: 460px;
   padding-right: 0;
-
 }
 .lottery .lottery-item ul li:nth-child(6) {
   left: 33.33333333%;
-  top:460px;
+  top: 460px;
 }
 .lottery .lottery-item ul li:nth-child(7) {
   left: 0;
-  top:460px;
+  top: 460px;
 }
 .lottery .lottery-item ul li:nth-child(8) {
   left: 0;
@@ -298,7 +300,7 @@ export default {
   padding-bottom: 10px;
 }
 .lottery .lottery-item .lottery-start .box {
-  height:100%;
+  height: 100%;
   font-size: 14px;
   color: #fff;
   cursor: pointer;
