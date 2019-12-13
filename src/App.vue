@@ -1,7 +1,19 @@
 <template>
   <div id="app">
     <div class="lottery-box" id="app">
-      <h1 class="title">浪漫元旦礼遇季 空格豪礼送不停</h1>
+      <!-- <h1 class="title">浪漫元旦礼遇季 空格豪礼送不停</h1> -->
+      <div id="titleFont">
+        <img src="../static/titleFont.png" alt />
+      </div>
+      <audio
+        src="http://congraedu.com.cn/zc/cj/static/mp3/chouJiang.mp3"
+        id="music1"
+        controls="controls"
+        loop
+        v-show="false"
+      ></audio>
+
+      <img class="play" @click="play" src="../static/play.png" alt />
       <div class="lottery">
         <div class="lottery-item">
           <div class="lottery-start">
@@ -53,26 +65,25 @@ export default {
       score: 10, //消耗积分
       list: [
         {
-          img: "https://s2.ax1x.com/2019/12/12/QyOhCj.png",
-          title: "浪漫家庭海盗七日游"
+          img: "../static/hd.png",
+          title: "浪漫海岛七日游"
         },
         {
-          img: "https://s2.ax1x.com/2019/12/12/QyO48s.png",
+          img: "../static/iPhone-11pro-max.png",
           title: "苹果11 pro max"
         },
-        { img: "https://s2.ax1x.com/2019/12/12/QyO52n.png", title: "2999现金" },
-        { img: "https://s2.ax1x.com/2019/12/12/QyOTK0.png", title: "1999现金" },
-        { img: "https://s2.ax1x.com/2019/12/12/QyO7rV.png", title: "999现金" },
+        { img: "../static/2999.png", title: "2999现金" },
+        { img: "../static/1999.png", title: "1999现金" },
+        { img: "../static/999.png", title: "999现金" },
         {
-          img: "https://s2.ax1x.com/2019/12/12/QyOqVU.png",
+          img: "../static/jqr.png",
           title: "扫地机器人"
         },
-        { img: "https://s2.ax1x.com/2019/12/12/QyOHbT.png", title: "全家福" },
+        { img: "../static/qjf.png", title: "全家福" },
         {
-          img: "https://s2.ax1x.com/2019/12/12/QyOIvq.png",
+          img: "../static/jhq.png",
           title: "空气净化器"
-        },
-
+        }
       ], //奖品1-9
       index: -1, // 当前转动到哪个位置，起点位置
       count: 8, // 总共有多少个位置
@@ -90,6 +101,19 @@ export default {
   mounted() {},
 
   methods: {
+    play() {
+      var audio = document.getElementById("music1");
+      console.log(audio);
+      if (audio !== null) {
+        //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+        // alert(audio.paused);
+        if (audio.paused) {
+          audio.play(); //audio.play();// 这个就是播放
+        } else {
+          audio.pause(); // 这个就是暂停
+        }
+      }
+    },
     startLottery() {
       if (!this.click) {
         return;
@@ -122,31 +146,33 @@ export default {
           // this.prize = index; //中奖位置,可由后台返回
           console.log(index);
           //设置3等奖，概率小于5%，奖励<=2
-          if (index <= 5 && this.p3 > 0) {
-            //5% 限定数量，如果数量没了，那么使用|| 符号吧概率给别的奖品
-            this.prize = 3;
-            this.p3--;
-            //抽中后发给后台存起来
-          } else if (index > 5 && index <= 25) {
-            //20%4等奖
-            this.prize = 4;
-          } else if (index > 25 && index <= 55) {
+          //if (index <= 5 && this.p3 > 0) {
+          //5% 限定数量，如果数量没了，那么使用|| 符号吧概率给别的奖品
+          //  this.prize = 3;
+          //  this.p3--;
+          //抽中后发给后台存起来
+          // } else if (index > 5 && index <= 25) {
+          //20%4等奖
+          // this.prize = 4;
+          //} else if (index > 25 && index <= 55) {
+          //this.prize = 5;
+          //} else if (index > 55 && index <= 85) {
+          //  this.prize = 6;
+          // } else {
+          //不管是某个奖品抽光还是剩下的15%概率，都算作else
+          //    this.prize = 7;
+          //}
+
+          if (index <= 60) {
             this.prize = 5;
-          } else if (index > 55 && index <= 85) {
-            this.prize = 6;
           } else {
-            //不管是某个奖品抽光还是剩下的15%概率，都算作else
             this.prize = 7;
           }
-          // if (this.prize > 7) {
-          // 	this.prize = 7
-          // 	}
         } else if (
           this.times > this.cycle + 10 &&
           ((this.prize === 0 && this.index === 7) ||
             this.prize === this.index + 1)
         ) {
-          //？？这句话？？
           this.speed += 110; //转动次数大于60，且中奖和当前差1个单位时开始大量减速， 为if为true的情况做准备(即显示中奖结果).
         } else {
           //[51,60],确定中奖位置后至少减速10次
@@ -169,23 +195,44 @@ export default {
         index = 0;
       } //转动的位置是0，1，2~7； 如果位置处于8，就重置为0。
       this.index = index; //转动1次,转动1个位置;
+    },
+
+    test() {
+      console.log("sss");
     }
   },
   mounted() {
-    this.$axios({
-      method: "get",
-      url: "http://192.168.0.195:7004/api/prize", // 接口地址
-     
-    })
-      .then(res => {
-        console.log(res, "success"); // 成功的返回
-      })
-      .catch(error => console.log(error, "error")); // 失败的返回
+    // this.$axios({
+    //   method: "get",
+    //   url: "http://192.168.0.195:7004/api/prize" // 接口地址
+    // })
+    //   .then(res => {
+    //     console.log(res, "success"); // 成功的返回
+    //   })
+    //   .catch(error => console.log(error, "error")); // 失败的返回
+
+    setTimeout(this.test, 1);
   }
 };
 </script>
 
 <style>
+#titleFont {
+  width: 100%;
+  margin: 20px 0;
+  text-align: center;
+}
+#titleFont img {
+  width: 600px;
+}
+.play {
+  width: 50px;
+  height: 50px;
+  bottom: 10px;
+  right: 10px;
+  position: fixed;
+}
+
 @keyframes changeBg {
   0% {
     background-image: url(https://s2.ax1x.com/2019/12/12/Qy2jCF.png);
@@ -249,7 +296,7 @@ export default {
 }
 .lottery .lottery-item ul li:nth-child(6) {
   left: 33.33333333%;
-  top:232px;
+  top: 232px;
 }
 .lottery .lottery-item ul li:nth-child(7) {
   left: 0;
@@ -269,14 +316,14 @@ export default {
 }
 .lottery .lottery-item ul li .box img {
   display: block;
-  height: 50px;
+  height: 80px;
   margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 5px;
+  margin-top: 3px;
+  /* margin-bottom: 5px; */
 }
 .lottery .lottery-item ul li .box p {
-  color: #708abf;
-  white-space: nowrap;
+  color: hsl(220, 38%, 59%);
+  /* white-space: nowrap; */
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 14px;
