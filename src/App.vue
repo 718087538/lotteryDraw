@@ -65,23 +65,23 @@ export default {
       score: 10, //消耗积分
       list: [
         {
-          img: "../static/hd.png",
+          img: "static/hd.png",
           title: "浪漫海岛七日游"
         },
         {
-          img: "../static/iPhone-11pro-max.png",
+          img: "static/iPhone-11pro-max.png",
           title: "苹果11 pro max"
         },
-        { img: "../static/2999.png", title: "2999现金" },
-        { img: "../static/1999.png", title: "1999现金" },
-        { img: "../static/999.png", title: "999现金" },
+        { img: "static/2999.png", title: "2999现金" },
+        { img: "static/1999.png", title: "1999现金" },
+        { img: "static/999.png", title: "999现金" },
         {
-          img: "../static/jqr.png",
+          img: "static/jqr.png",
           title: "扫地机器人"
         },
-        { img: "../static/qjf.png", title: "全家福" },
+        { img: "static/qjf.png", title: "全家福" },
         {
-          img: "../static/jhq.png",
+          img: "static/jhq.png",
           title: "空气净化器"
         }
       ], //奖品1-9
