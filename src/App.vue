@@ -20,7 +20,7 @@
             <div class="box gray" v-if="isStart===0">
               <p>活动未开始</p>
             </div>
-            <div class="box" @click="startLottery" v-if="isStart===1">
+            <div class="box" :class="{startBtn:canPress}" @click="startLottery" v-if="isStart===1">
               <p>
                 <b>抽奖</b>
               </p>
@@ -50,7 +50,7 @@
           <img :src="list[index].img" alt />
         </p>
         <h2>获得{{list[index].title}}</h2>
-        <div class="btnsave" @click="showToast=false">确定</div>
+        <div class="btnsave" @click="sureBtn">确定</div>
       </div>
     </div>
   </div>
@@ -61,6 +61,7 @@ export default {
   name: "App",
   data() {
     return {
+      canPress: false, //是否能点击多次按钮
       isStart: 1,
       score: 10, //消耗积分
       list: [
@@ -101,6 +102,10 @@ export default {
   mounted() {},
 
   methods: {
+    sureBtn() {
+      this.showToast = false;
+      this.canPress = false;
+    },
     play() {
       var audio = document.getElementById("music1");
       console.log(audio);
@@ -118,6 +123,11 @@ export default {
       if (!this.click) {
         return;
       }
+      if (this.canPress) {
+        return false;
+      }
+      //通过了上面的代表刚开始点击，不在抽奖中
+      this.canPress = true;
 
       this.startRoll();
     },
@@ -143,31 +153,28 @@ export default {
           this.speed -= 10; // 加快转动速度
         } else if (this.times === this.cycle) {
           const index = parseInt(Math.random() * 100, 0) || 0; // 随机获得一个中奖位置
-          // this.prize = index; //中奖位置,可由后台返回
-          console.log(index);
-          //设置3等奖，概率小于5%，奖励<=2
-          //if (index <= 5 && this.p3 > 0) {
-          //5% 限定数量，如果数量没了，那么使用|| 符号吧概率给别的奖品
-          //  this.prize = 3;
-          //  this.p3--;
-          //抽中后发给后台存起来
-          // } else if (index > 5 && index <= 25) {
-          //20%4等奖
-          // this.prize = 4;
-          //} else if (index > 25 && index <= 55) {
-          //this.prize = 5;
-          //} else if (index > 55 && index <= 85) {
-          //  this.prize = 6;
-          // } else {
-          //不管是某个奖品抽光还是剩下的15%概率，都算作else
-          //    this.prize = 7;
-          //}
-
-          if (index <= 60) {
+      
+          if (index <= 5) {
+            this.prize = 4;
+          } else if (index > 5 && index <= 35) {
             this.prize = 5;
+          } else if (index > 35 && index <= 55) {
+            this.prize = 6;
+          } else if (index > 55 && index <= 100) {
+            this.prize = 7;
           } else {
             this.prize = 7;
           }
+
+          /* if (index <= 5 && this.p3 > 0) {
+             // 5% 限定数量，如果数量没了，那么使用|| 符号吧概率给别的奖品
+             this.prize = 3;
+             // this.p3--;
+             抽中后发给后台存起来;
+           } else if (index > 5 && index <= 25) {
+             // 20%4等奖
+             this.prize = 4;
+           }*/
         } else if (
           this.times > this.cycle + 10 &&
           ((this.prize === 0 && this.index === 7) ||
@@ -217,6 +224,11 @@ export default {
 </script>
 
 <style>
+.startBtn {
+  background: rgb(151, 150, 150) !important;
+  border-radius: 6px;
+}
+
 #titleFont {
   width: 100%;
   margin: 20px 0;
