@@ -152,19 +152,16 @@ export default {
           //[0-50)
           this.speed -= 10; // 加快转动速度
         } else if (this.times === this.cycle) {
-          const index = parseInt(Math.random() * 100, 0) || 0; // 随机获得一个中奖位置
-      
-          if (index <= 5) {
-            this.prize = 4;
-          } else if (index > 5 && index <= 35) {
-            this.prize = 5;
-          } else if (index > 35 && index <= 55) {
-            this.prize = 6;
-          } else if (index > 55 && index <= 100) {
-            this.prize = 7;
-          } else {
-            this.prize = 7;
-          }
+          this.prize = 5;
+          // const index = parseInt(Math.random() * 100, 0) || 0; // 随机获得一个中奖位置
+
+          //  if (index <= 50) {
+          //   this.prize = 5;
+          // } else if (index > 50 && index <= 100) {
+          //   this.prize = 7;
+          // } else {
+          //   this.prize = 7;
+          // }
 
           /* if (index <= 5 && this.p3 > 0) {
              // 5% 限定数量，如果数量没了，那么使用|| 符号吧概率给别的奖品
