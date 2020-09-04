@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "css-loader": "^3.3.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "postcss-pxtorem": "^4.0.1",
     "sass-loader": "^8.0.0",
     "vue": "^2.5.2",
